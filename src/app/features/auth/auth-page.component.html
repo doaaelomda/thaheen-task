@@ -1,0 +1,66 @@
+<div class="mx-auto flex min-h-[70vh] max-w-md flex-col justify-center px-4 py-10 sm:px-6">
+  <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8 dark:border-slate-800 dark:bg-slate-900">
+    <div class="mb-6 flex justify-center">
+      <div class="flex rounded-full bg-slate-100 p-1 dark:bg-slate-800">
+        <button
+          type="button"
+          (click)="setMode('login')"
+          class="rounded-full px-5 py-2 text-sm font-bold transition"
+          [class.bg-white]="mode() === 'login'"
+          [class.dark:bg-slate-700]="mode() === 'login'"
+          [class.text-primary-700]="mode() === 'login'"
+          [class.dark:text-primary-300]="mode() === 'login'"
+          [class.shadow-sm]="mode() === 'login'"
+          [class.text-slate-500]="mode() !== 'login'"
+          [class.dark:text-slate-400]="mode() !== 'login'"
+        >
+          {{ 'auth.login' | translate }}
+        </button>
+        <button
+          type="button"
+          (click)="setMode('signup')"
+          class="rounded-full px-5 py-2 text-sm font-bold transition"
+          [class.bg-white]="mode() === 'signup'"
+          [class.dark:bg-slate-700]="mode() === 'signup'"
+          [class.text-primary-700]="mode() === 'signup'"
+          [class.dark:text-primary-300]="mode() === 'signup'"
+          [class.shadow-sm]="mode() === 'signup'"
+          [class.text-slate-500]="mode() !== 'signup'"
+          [class.dark:text-slate-400]="mode() !== 'signup'"
+        >
+          {{ 'auth.signup' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <h1 class="mb-1 text-center text-xl font-extrabold text-slate-900 dark:text-slate-50">
+      {{ (mode() === 'login' ? 'auth.loginTitle' : 'auth.signupTitle') | translate }}
+    </h1>
+    <p class="mb-6 text-center text-sm text-slate-500 dark:text-slate-400">{{ 'auth.mockNotice' | translate }}</p>
+
+    @if (errorKey(); as key) {
+      <div class="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-center text-sm text-red-700 dark:border-red-900 dark:bg-red-950/40 dark:text-red-300" role="alert">
+        {{ key | translate }}
+      </div>
+    }
+
+    @if (mode() === 'login') {
+      <form class="flex flex-col gap-4" [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+        <app-input [label]="'auth.email' | translate" type="email" formControlName="email" />
+        <app-input [label]="'auth.password' | translate" type="password" formControlName="password" />
+        <app-button type="submit" [fullWidth]="true" class="mt-2">{{ 'auth.loginCta' | translate }}</app-button>
+      </form>
+    } @else {
+      <form class="flex flex-col gap-4" [formGroup]="signupForm" (ngSubmit)="submitSignup()">
+        <app-input [label]="'auth.name' | translate" type="text" formControlName="name" />
+        <app-input [label]="'auth.email' | translate" type="email" formControlName="email" />
+        <app-input [label]="'auth.password' | translate" type="password" formControlName="password" />
+        <app-button type="submit" [fullWidth]="true" class="mt-2">{{ 'auth.signupCta' | translate }}</app-button>
+      </form>
+    }
+
+    <a routerLink="/courses" class="mt-5 block text-center text-sm font-medium text-slate-500 hover:text-primary-700 dark:text-slate-400">
+      {{ 'auth.skip' | translate }}
+    </a>
+  </div>
+</div>

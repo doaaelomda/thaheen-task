@@ -1,0 +1,48 @@
+<a
+  [routerLink]="['/courses', course().id]"
+  class="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm transition hover:-translate-y-1 hover:border-primary-200 hover:shadow-lg"
+>
+  <div class="relative overflow-hidden">
+    <img
+      [src]="course().thumbnail"
+      [alt]="languageService.pick(course().title)"
+      class="h-40 w-full object-cover transition duration-300 group-hover:scale-105"
+      loading="lazy"
+    />
+    <span
+      class="absolute top-3 rounded-full bg-black/60 px-2.5 py-1 text-xs font-medium text-white backdrop-blur end-3"
+    >
+      {{ 'courses.lessonCount' | translate: { count: lessonCount() } }}
+    </span>
+    @if (showProgress() && status() !== 'not-started') {
+      <span
+        class="absolute top-3 rounded-full px-2.5 py-1 text-xs font-medium text-white backdrop-blur start-3"
+        [class.bg-primary-600]="status() === 'completed'"
+        [class.bg-amber-500]="status() === 'in-progress'"
+      >
+        {{ 'lessonStatus.' + status() | translate }}
+      </span>
+    }
+  </div>
+  <div class="flex flex-1 flex-col gap-2 p-4">
+    <h3 class="text-base font-bold text-slate-900 dark:text-slate-50 group-hover:text-primary-700">
+      {{ languageService.pick(course().title) }}
+    </h3>
+    <p class="flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400">
+      <span aria-hidden="true">👤</span>
+      {{ languageService.pick(course().instructor) }}
+    </p>
+
+    @if (showProgress()) {
+      <div class="mt-auto pt-2">
+        <div class="mb-1 flex items-center justify-between text-xs font-medium text-slate-500 dark:text-slate-400">
+          <span>{{ 'courses.progress' | translate }}</span>
+          <span class="text-primary-700 dark:text-primary-300">{{ progressPercent() }}%</span>
+        </div>
+        <div class="h-2 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800" role="progressbar" [attr.aria-valuenow]="progressPercent()" aria-valuemin="0" aria-valuemax="100">
+          <div class="h-full rounded-full bg-gradient-to-r from-primary-500 to-primary-600 transition-all" [style.width.%]="progressPercent()"></div>
+        </div>
+      </div>
+    }
+  </div>
+</a>

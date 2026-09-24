@@ -1,0 +1,107 @@
+<div class="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+  <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+    <h1 class="text-2xl font-extrabold text-slate-900 dark:text-slate-50 sm:text-3xl">{{ 'courses.title' | translate }}</h1>
+    <p class="mt-1 text-slate-500 dark:text-slate-400">{{ 'courses.subtitle' | translate }}</p>
+  </div>
+</div>
+
+<div class="mx-auto max-w-6xl px-4 py-6 sm:px-6">
+  @if (loading()) {
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      @for (i of skeletonPlaceholders; track i) {
+        <app-course-card-skeleton />
+      }
+    </div>
+  } @else if (error()) {
+    <app-error-state [title]="'courses.loadError' | translate" [subtitle]="'courses.loadErrorHint' | translate" />
+  } @else if (courses().length === 0) {
+    <app-empty-state [title]="'courses.empty' | translate" />
+  } @else {
+    <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+      <input
+        type="search"
+        class="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-2.5 text-sm text-slate-800 dark:text-slate-100 focus:border-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-200 sm:max-w-xs"
+        [placeholder]="'courses.searchPlaceholder' | translate"
+        [value]="searchQuery()"
+        (input)="onSearchInput($event)"
+        [attr.aria-label]="'courses.searchPlaceholder' | translate"
+      />
+
+      <div class="relative">
+        <select
+          class="appearance-none rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-2.5 ps-3.5 pe-9 text-sm text-slate-800 dark:text-slate-100 focus:border-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-200"
+          [value]="instructorFilter()"
+          (change)="onInstructorChange($event)"
+          [attr.aria-label]="'courses.filterInstructor' | translate"
+        >
+          <option value="">{{ 'courses.filterAllInstructors' | translate }}</option>
+          @for (name of instructors(); track name) {
+            <option [value]="name">{{ name }}</option>
+          }
+        </select>
+        <span class="pointer-events-none absolute end-3 top-1/2 -translate-y-1/2 text-xs text-slate-400" aria-hidden="true">▾</span>
+      </div>
+
+      @if (authService.isLoggedIn()) {
+        <div class="relative">
+          <select
+            class="appearance-none rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-2.5 ps-3.5 pe-9 text-sm text-slate-800 dark:text-slate-100 focus:border-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-200"
+            [value]="statusFilter()"
+            (change)="onStatusChange($event)"
+            [attr.aria-label]="'courses.filterProgress' | translate"
+          >
+            <option value="all">{{ 'courses.filterAllStatuses' | translate }}</option>
+            <option value="not-started">{{ 'lessonStatus.not-started' | translate }}</option>
+            <option value="in-progress">{{ 'lessonStatus.in-progress' | translate }}</option>
+            <option value="completed">{{ 'lessonStatus.completed' | translate }}</option>
+          </select>
+          <span class="pointer-events-none absolute end-3 top-1/2 -translate-y-1/2 text-xs text-slate-400" aria-hidden="true">▾</span>
+        </div>
+      }
+
+      <div class="relative sm:ms-auto">
+        <select
+          class="appearance-none rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-2.5 ps-3.5 pe-9 text-sm text-slate-800 dark:text-slate-100 focus:border-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-200"
+          [value]="sortBy()"
+          (change)="onSortChange($event)"
+          [attr.aria-label]="'courses.sortBy' | translate"
+        >
+          <option value="name">{{ 'courses.sortName' | translate }}</option>
+          <option value="instructor">{{ 'courses.sortInstructor' | translate }}</option>
+          @if (authService.isLoggedIn()) {
+            <option value="progress">{{ 'courses.sortProgress' | translate }}</option>
+          }
+        </select>
+        <span class="pointer-events-none absolute end-3 top-1/2 -translate-y-1/2 text-xs text-slate-400" aria-hidden="true">▾</span>
+      </div>
+    </div>
+
+    @if (continueWatching(); as cw) {
+      <a
+        [routerLink]="['/courses', cw.courseId, 'lessons', cw.lessonId]"
+        class="mb-6 flex items-center justify-between gap-4 rounded-2xl border border-primary-200 dark:border-primary-800 bg-primary-50 dark:bg-primary-950/40 p-4 transition hover:bg-primary-100 sm:p-5"
+      >
+        <div>
+          <p class="text-xs font-bold uppercase tracking-wide text-primary-700 dark:text-primary-300">
+            {{ 'courses.continueWatching' | translate }}
+          </p>
+          <p class="mt-1 font-semibold text-slate-900 dark:text-slate-50">{{ languageService.pick(cw.lessonTitle) }}</p>
+          <p class="text-sm text-slate-500 dark:text-slate-400">{{ languageService.pick(cw.courseTitle) }} · {{ cw.positionSec | duration }} / {{ cw.durationSec | duration }}</p>
+        </div>
+        <span class="shrink-0 rounded-full bg-primary-600 px-4 py-2 text-sm font-medium text-white shadow-sm">
+          {{ 'courses.resume' | translate }}
+        </span>
+      </a>
+    }
+
+    @if (filteredCourses().length === 0) {
+      <app-empty-state [title]="'courses.noResults' | translate" />
+    } @else {
+      <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        @for (course of filteredCourses(); track course.id) {
+          <app-course-card [course]="course" [progressPercent]="progressFor(course.id)" />
+        }
+      </div>
+    }
+  }
+</div>

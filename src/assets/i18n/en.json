@@ -1,0 +1,111 @@
+{
+  "app": {
+    "name": "Thaheen",
+    "tagline": "An education platform that brings your courses and video lessons together in one place, in Arabic and English.",
+    "rights": "© {{year}} Thaheen. All rights reserved."
+  },
+  "nav": {
+    "home": "Home",
+    "courses": "Courses"
+  },
+  "home": {
+    "badge": "An Arabic-English learning platform",
+    "heroTitle": "Start your learning journey with Thaheen",
+    "heroSubtitle": "Video courses organized into sequential lessons, with your progress saved automatically right where you left off.",
+    "ctaBrowse": "Browse courses",
+    "ctaContinue": "Continue watching",
+    "statsCourses": "Courses available",
+    "statsLessons": "Video lessons",
+    "featuresTitle": "Why Thaheen?",
+    "featureVideoTitle": "Video lessons",
+    "featureVideoDesc": "Watch your lessons in great quality with full control over speed and seeking.",
+    "featureProgressTitle": "Progress tracking",
+    "featureProgressDesc": "We save where you left off and show your completion percentage for every course.",
+    "featureSequentialTitle": "Sequential order",
+    "featureSequentialDesc": "Lessons unlock in order so your understanding builds step by step.",
+    "featureBilingualTitle": "Arabic & English",
+    "featureBilingualDesc": "The platform's interface and course content are fully available in both languages.",
+    "featuredTitle": "Latest courses",
+    "viewAll": "View all"
+  },
+  "common": {
+    "loading": "Loading...",
+    "backToCourses": "Back to courses",
+    "backToCourse": "Back to course",
+    "darkMode": "Dark mode",
+    "lightMode": "Light mode",
+    "requestError": "Something went wrong while loading data"
+  },
+  "auth": {
+    "login": "Log in",
+    "signup": "Sign up",
+    "loginTitle": "Log in",
+    "signupTitle": "Create a student account",
+    "mockNotice": "Local demo: your data is saved on this device only, no real server.",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "loginCta": "Log in",
+    "signupCta": "Create account",
+    "logout": "Log out",
+    "skip": "Continue without logging in",
+    "invalidCredentials": "Incorrect email or password",
+    "emailTaken": "This email is already registered",
+    "mustLoginToWatch": "You need to log in first to watch this lesson",
+    "mustEnrollToWatch": "You need to enroll in this course first to watch this lesson"
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email",
+    "minLength": "Must be at least {{min}} characters"
+  },
+  "courses": {
+    "title": "Courses",
+    "subtitle": "Browse all available courses and continue your video lessons.",
+    "lessonCount": "{{count}} lessons",
+    "progress": "Progress",
+    "loadError": "Couldn't load courses",
+    "loadErrorHint": "Check your connection and try again.",
+    "empty": "No courses available yet",
+    "continueWatching": "Continue watching",
+    "resume": "Resume",
+    "searchPlaceholder": "Search by course name...",
+    "filterInstructor": "Filter by instructor",
+    "filterAllInstructors": "All instructors",
+    "filterProgress": "Filter by progress",
+    "filterAllStatuses": "All statuses",
+    "sortBy": "Sort by",
+    "sortName": "Name",
+    "sortInstructor": "Instructor",
+    "sortProgress": "Progress",
+    "noResults": "No matching courses",
+    "enroll": "Enroll in this course",
+    "enrolled": "Enrolled"
+  },
+  "courseDetails": {
+    "notFound": "This course doesn't exist",
+    "lockedMessage": "This lesson is locked. Complete the previous lesson first.",
+    "noLessons": "This course has no lessons yet",
+    "lessons": "Lessons"
+  },
+  "lessonStatus": {
+    "completed": "Completed",
+    "in-progress": "In progress",
+    "not-started": "Not started",
+    "locked": "Locked",
+    "loginRequired": "Log in to watch",
+    "enrollRequired": "Enroll to watch"
+  },
+  "lessonPlayer": {
+    "notFound": "This lesson doesn't exist",
+    "videoError": "Couldn't play this video",
+    "videoErrorHint": "The video file may be missing or broken.",
+    "seek": "Seek bar",
+    "play": "Play",
+    "pause": "Pause",
+    "fullscreen": "Fullscreen",
+    "nextLesson": "Next lesson",
+    "notes": "My notes",
+    "notesPlaceholder": "Write your notes for this lesson here..."
+  }
+}

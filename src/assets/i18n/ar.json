@@ -1,0 +1,111 @@
+{
+  "app": {
+    "name": "ذهين",
+    "tagline": "منصة تعليمية تجمع كورساتك ودروسك المصورة في مكان واحد، بالعربية والإنجليزية.",
+    "rights": "© {{year}} ذهين. جميع الحقوق محفوظة."
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "courses": "الكورسات"
+  },
+  "home": {
+    "badge": "منصة تعليمية عربية إنجليزية",
+    "heroTitle": "ابدأ رحلتك التعليمية مع ذهين",
+    "heroSubtitle": "كورسات مصورة منظمة في دروس متتابعة، مع متابعة تقدمك تلقائيًا من حيث توقفت.",
+    "ctaBrowse": "تصفح الكورسات",
+    "ctaContinue": "متابعة المشاهدة",
+    "statsCourses": "كورس متاح",
+    "statsLessons": "درس مصوّر",
+    "featuresTitle": "لماذا ذهين؟",
+    "featureVideoTitle": "دروس مصورة",
+    "featureVideoDesc": "شاهد دروسك بجودة عالية مع تحكم كامل في السرعة والتقديم.",
+    "featureProgressTitle": "تتبّع التقدم",
+    "featureProgressDesc": "نحفظ مكان توقفك تلقائيًا ونعرض نسبة إنجازك في كل كورس.",
+    "featureSequentialTitle": "ترتيب متسلسل",
+    "featureSequentialDesc": "الدروس تُفتح بالترتيب لضمان بناء الفهم خطوة بخطوة.",
+    "featureBilingualTitle": "عربي وإنجليزي",
+    "featureBilingualDesc": "واجهة المنصة ومحتوى الكورسات متاحان بالكامل باللغتين.",
+    "featuredTitle": "أحدث الكورسات",
+    "viewAll": "عرض الكل"
+  },
+  "common": {
+    "loading": "جارٍ التحميل...",
+    "backToCourses": "العودة إلى الكورسات",
+    "backToCourse": "العودة إلى الكورس",
+    "darkMode": "الوضع الداكن",
+    "lightMode": "الوضع الفاتح",
+    "requestError": "حدث خطأ أثناء تحميل البيانات"
+  },
+  "auth": {
+    "login": "دخول",
+    "signup": "حساب جديد",
+    "loginTitle": "تسجيل الدخول",
+    "signupTitle": "إنشاء حساب طالب",
+    "mockNotice": "تجربة محلية: بياناتك تُحفظ على هذا الجهاز فقط، بدون خادم فعلي.",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "loginCta": "تسجيل الدخول",
+    "signupCta": "إنشاء الحساب",
+    "logout": "تسجيل الخروج",
+    "skip": "المتابعة بدون تسجيل الدخول",
+    "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+    "emailTaken": "هذا البريد الإلكتروني مسجّل بالفعل",
+    "mustLoginToWatch": "يجب تسجيل الدخول أولًا لمشاهدة هذا الدرس",
+    "mustEnrollToWatch": "يجب الاشتراك في هذا الكورس أولًا لمشاهدة هذا الدرس"
+  },
+  "validation": {
+    "required": "هذا الحقل مطلوب",
+    "email": "يرجى إدخال بريد إلكتروني صحيح",
+    "minLength": "يجب ألا يقل عن {{min}} أحرف"
+  },
+  "courses": {
+    "title": "الكورسات",
+    "subtitle": "تصفّح كل الكورسات المتاحة وتابع دروسك المصورة.",
+    "lessonCount": "{{count}} درس",
+    "progress": "التقدم",
+    "loadError": "تعذّر تحميل الكورسات",
+    "loadErrorHint": "تأكد من اتصالك وحاول مرة أخرى.",
+    "empty": "لا توجد كورسات متاحة حاليًا",
+    "continueWatching": "متابعة المشاهدة",
+    "resume": "استكمال",
+    "searchPlaceholder": "ابحث باسم الكورس...",
+    "filterInstructor": "فلترة حسب المحاضر",
+    "filterAllInstructors": "كل المحاضرين",
+    "filterProgress": "فلترة حسب حالة التقدم",
+    "filterAllStatuses": "كل الحالات",
+    "sortBy": "الترتيب حسب",
+    "sortName": "الاسم",
+    "sortInstructor": "المحاضر",
+    "sortProgress": "نسبة التقدم",
+    "noResults": "لا توجد نتائج مطابقة",
+    "enroll": "اشترك في الكورس",
+    "enrolled": "مشترك"
+  },
+  "courseDetails": {
+    "notFound": "هذا الكورس غير موجود",
+    "lockedMessage": "هذا الدرس مقفل. أكمل الدرس السابق أولًا للمتابعة.",
+    "noLessons": "لا توجد دروس في هذا الكورس بعد",
+    "lessons": "دروس"
+  },
+  "lessonStatus": {
+    "completed": "مكتمل",
+    "in-progress": "قيد المشاهدة",
+    "not-started": "لم يبدأ",
+    "locked": "مقفل",
+    "loginRequired": "سجّل الدخول للمشاهدة",
+    "enrollRequired": "اشترك للمشاهدة"
+  },
+  "lessonPlayer": {
+    "notFound": "هذا الدرس غير موجود",
+    "videoError": "تعذّر تشغيل الفيديو",
+    "videoErrorHint": "قد يكون ملف الفيديو مفقودًا أو تالفًا.",
+    "seek": "شريط التقدم",
+    "play": "تشغيل",
+    "pause": "إيقاف مؤقت",
+    "fullscreen": "ملء الشاشة",
+    "nextLesson": "الدرس التالي",
+    "notes": "ملاحظاتي",
+    "notesPlaceholder": "اكتب ملاحظاتك على هذا الدرس هنا..."
+  }
+}

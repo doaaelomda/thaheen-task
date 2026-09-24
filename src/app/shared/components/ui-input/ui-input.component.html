@@ -1,0 +1,26 @@
+<label class="flex flex-col gap-1.5">
+  @if (label) {
+    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">{{ label }}</span>
+  }
+  <input
+    [type]="type"
+    [value]="value"
+    [disabled]="disabled"
+    (input)="onInput($event)"
+    (blur)="onTouched()"
+    class="rounded-xl border px-3.5 py-2.5 text-sm outline-none transition dark:bg-slate-800 dark:text-slate-100"
+    [class.border-slate-300]="!showError"
+    [class.dark:border-slate-700]="!showError"
+    [class.focus:border-primary-500]="!showError"
+    [class.focus:ring-2]="!showError"
+    [class.focus:ring-primary-100]="!showError"
+    [class.border-red-400]="showError"
+    [class.dark:border-red-800]="showError"
+    [class.focus:ring-2]="showError"
+    [class.focus:ring-red-100]="showError"
+    [attr.aria-invalid]="showError"
+  />
+  @if (showError && errorKey) {
+    <span class="text-xs font-medium text-red-600 dark:text-red-400">{{ errorKey | translate: errorParams }}</span>
+  }
+</label>

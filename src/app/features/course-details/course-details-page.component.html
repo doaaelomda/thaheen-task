@@ -1,0 +1,142 @@
+@if (loading()) {
+  <div class="mx-auto max-w-3xl px-4 py-6">
+    <app-loading-spinner />
+  </div>
+} @else if (!course(); as _) {
+  <div class="mx-auto max-w-3xl px-4 py-6">
+    <app-not-found [message]="'courseDetails.notFound' | translate" />
+  </div>
+} @else {
+  @let c = course()!;
+
+  <div class="border-b border-slate-200 dark:border-slate-800 bg-gradient-to-br from-primary-700 to-primary-600 text-white">
+    <div class="mx-auto max-w-3xl px-4 py-8 sm:px-6">
+      <a routerLink="/courses" class="mb-3 inline-flex items-center gap-1 text-sm font-medium text-primary-50 hover:underline">
+        {{ languageService.isRtl() ? '→' : '←' }} {{ 'common.backToCourses' | translate }}
+      </a>
+
+      <h1 class="text-2xl font-extrabold sm:text-3xl">{{ languageService.pick(c.title) }}</h1>
+      <p class="mt-1 flex items-center gap-1.5 text-primary-50">
+        <span aria-hidden="true">👤</span>
+        {{ languageService.pick(c.instructor) }}
+      </p>
+
+      <div class="mt-4 flex flex-wrap items-center gap-4">
+        <span class="rounded-full bg-white/15 px-3 py-1 text-sm backdrop-blur">
+          {{ 'courses.lessonCount' | translate: { count: totalLessons() } }}
+        </span>
+        @if (authService.isLoggedIn() && isEnrolled()) {
+          <div class="flex items-center gap-2">
+            <div class="h-2 w-40 overflow-hidden rounded-full bg-white/20">
+              <div class="h-full rounded-full bg-white" [style.width.%]="progressService.courseProgressPercent(c)"></div>
+            </div>
+            <span class="text-sm">{{ progressService.courseProgressPercent(c) }}%</span>
+          </div>
+        }
+      </div>
+
+      @if (authService.isLoggedIn() && !isEnrolled()) {
+        <button
+          type="button"
+          (click)="onEnroll()"
+          class="mt-4 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-primary-700 shadow-sm transition hover:bg-primary-50"
+        >
+          {{ 'courses.enroll' | translate }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-3xl px-4 py-6 sm:px-6">
+    @if (lockedMessage()) {
+      <div class="mb-4 rounded-xl border border-amber-300 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/40 p-3 text-sm text-amber-800 dark:text-amber-300" role="alert">
+        {{ 'courseDetails.lockedMessage' | translate }}
+      </div>
+    }
+
+    @if (totalLessons() === 0) {
+      <app-empty-state [title]="'courseDetails.noLessons' | translate" />
+    } @else {
+      <div class="flex flex-col gap-6">
+        @for (section of c.sections; track section.id) {
+          <section>
+            <h2 class="mb-2 flex items-center gap-2 text-lg font-bold text-slate-800 dark:text-slate-100">
+              <span class="h-2 w-2 rounded-full bg-primary-500" aria-hidden="true"></span>
+              {{ languageService.pick(section.title) }}
+            </h2>
+            <ul class="flex flex-col gap-2">
+              @for (lesson of section.lessons; track lesson.id) {
+                @let status = progressService.lessonStatus(c.id, lesson.id);
+                @let unlocked = isUnlocked(lesson.id);
+                <li>
+                  @if (unlocked) {
+                    <a
+                      [routerLink]="lessonLink(lesson.id)"
+                      class="flex items-center justify-between gap-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 shadow-sm transition hover:border-primary-300 hover:bg-primary-50 hover:shadow-md"
+                    >
+                      <div class="flex items-center gap-3">
+                        <span
+                          class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm"
+                          [class.bg-primary-600]="status === 'completed'"
+                          [class.text-white]="status === 'completed'"
+                          [class.bg-slate-100]="status !== 'completed'"
+                          aria-hidden="true"
+                        >
+                          @if (status === 'completed') { ✓ } @else { ▶ }
+                        </span>
+                        <span class="font-medium text-slate-800 dark:text-slate-100">{{ languageService.pick(lesson.title) }}</span>
+                      </div>
+                      <div class="flex items-center gap-3 text-sm text-slate-500 dark:text-slate-400">
+                        <span>{{ lesson.durationSec | duration }}</span>
+                        <span
+                          class="rounded-full px-2 py-0.5 text-xs font-medium"
+                          [class.bg-primary-100]="status === 'completed'"
+                          [class.text-primary-700]="status === 'completed'"
+                          [class.bg-amber-100]="status === 'in-progress'"
+                          [class.text-amber-700]="status === 'in-progress'"
+                          [class.bg-slate-100]="status === 'not-started'"
+                          [class.text-slate-500]="status === 'not-started'"
+                        >
+                          {{ 'lessonStatus.' + status | translate }}
+                        </span>
+                      </div>
+                    </a>
+                  } @else {
+                    @let reason = lockReason(lesson.id);
+                    @let clickable = reason === 'auth' || reason === 'enroll';
+                    <div
+                      class="flex items-center justify-between gap-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-3 text-slate-400 dark:text-slate-500"
+                      [class.cursor-pointer]="clickable"
+                      [class.cursor-not-allowed]="!clickable"
+                      [class.hover:border-primary-300]="clickable"
+                      [attr.role]="clickable ? 'button' : null"
+                      [attr.aria-disabled]="!clickable"
+                      (click)="onLockedLessonClick(lesson.id)"
+                    >
+                      <div class="flex items-center gap-3">
+                        <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-sm" aria-hidden="true">🔒</span>
+                        <span class="font-medium">{{ languageService.pick(lesson.title) }}</span>
+                      </div>
+                      <div class="flex items-center gap-3 text-sm">
+                        <span>{{ lesson.durationSec | duration }}</span>
+                        <span class="rounded-full bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-xs font-medium">
+                          @if (reason === 'auth') {
+                            {{ 'lessonStatus.loginRequired' | translate }}
+                          } @else if (reason === 'enroll') {
+                            {{ 'lessonStatus.enrollRequired' | translate }}
+                          } @else {
+                            {{ 'lessonStatus.locked' | translate }}
+                          }
+                        </span>
+                      </div>
+                    </div>
+                  }
+                </li>
+              }
+            </ul>
+          </section>
+        }
+      </div>
+    }
+  </div>
+}
