@@ -38,12 +38,6 @@
     </h1>
     <p class="mb-6 text-center text-sm text-slate-500 dark:text-slate-400">{{ 'auth.mockNotice' | translate }}</p>
 
-    @if (errorKey(); as key) {
-      <div class="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-center text-sm text-red-700 dark:border-red-900 dark:bg-red-950/40 dark:text-red-300" role="alert">
-        {{ key | translate }}
-      </div>
-    }
-
     @if (mode() === 'login') {
       <form class="flex flex-col gap-4" [formGroup]="loginForm" (ngSubmit)="submitLogin()">
         <app-input [label]="'auth.email' | translate" type="email" formControlName="email" />

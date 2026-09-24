@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../core/services/auth.service';
+import { ToastService } from '../../core/services/toast.service';
 import { UiButtonComponent } from '../../shared/components/ui-button/ui-button.component';
 import { UiInputComponent } from '../../shared/components/ui-input/ui-input.component';
 
@@ -19,9 +20,10 @@ export class AuthPageComponent {
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  private readonly toastService = inject(ToastService);
+  private readonly translate = inject(TranslateService);
 
   protected readonly mode = signal<AuthMode>('login');
-  protected readonly errorKey = signal<string | null>(null);
 
   protected readonly loginForm = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
@@ -36,7 +38,6 @@ export class AuthPageComponent {
 
   setMode(mode: AuthMode): void {
     this.mode.set(mode);
-    this.errorKey.set(null);
   }
 
   submitLogin(): void {
@@ -49,7 +50,7 @@ export class AuthPageComponent {
     if (result.success) {
       void this.router.navigateByUrl('/courses');
     } else {
-      this.errorKey.set('auth.invalidCredentials');
+      this.toastService.show(this.translate.instant('auth.invalidCredentials'));
     }
   }
 
@@ -63,7 +64,7 @@ export class AuthPageComponent {
     if (result.success) {
       void this.router.navigateByUrl('/courses');
     } else {
-      this.errorKey.set('auth.emailTaken');
+      this.toastService.show(this.translate.instant('auth.emailTaken'));
     }
   }
 }
