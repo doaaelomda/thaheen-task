@@ -1,0 +1,1 @@
+import{H as i}from"./chunk-WJQ4QZ2D.js";var m=class n{transform(o){let t=Math.max(0,Math.floor(o??0)),e=Math.floor(t/3600),s=Math.floor(t%3600/60),a=t%60,r=p=>p.toString().padStart(2,"0");return e>0?`${e}:${r(s)}:${r(a)}`:`${s}:${r(a)}`}static \u0275fac=function(t){return new(t||n)};static \u0275pipe=i({name:"duration",type:n,pure:!0})};export{m as a};

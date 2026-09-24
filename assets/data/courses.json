@@ -1,0 +1,92 @@
+{
+  "courses": [
+    {
+      "id": "c1",
+      "title": { "ar": "أساسيات علم التشريح", "en": "Fundamentals of Anatomy" },
+      "instructor": { "ar": "د. أحمد سالم", "en": "Dr. Ahmed Salem" },
+      "thumbnail": "assets/images/course-anatomy.svg",
+      "sections": [
+        {
+          "id": "c1-s1",
+          "title": { "ar": "الجهاز الهيكلي", "en": "The Skeletal System" },
+          "lessons": [
+            {
+              "id": "c1-l1",
+              "title": { "ar": "العظام", "en": "Bones" },
+              "durationSec": 8,
+              "video": "assets/videos/lesson1.mp4"
+            },
+            {
+              "id": "c1-l2",
+              "title": { "ar": "المفاصل", "en": "Joints" },
+              "durationSec": 12,
+              "video": "assets/videos/lesson2.mp4"
+            }
+          ]
+        },
+        {
+          "id": "c1-s2",
+          "title": { "ar": "الجهاز العضلي", "en": "The Muscular System" },
+          "lessons": [
+            {
+              "id": "c1-l3",
+              "title": { "ar": "العضلات الهيكلية", "en": "Skeletal Muscles" },
+              "durationSec": 9,
+              "video": "assets/videos/lesson3.mp4"
+            },
+            {
+              "id": "c1-l4",
+              "title": { "ar": "آلية الانقباض العضلي", "en": "Muscle Contraction Mechanism" },
+              "durationSec": 23,
+              "video": "assets/videos/lesson4.mp4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "title": { "ar": "مبادئ التمريض", "en": "Principles of Nursing" },
+      "instructor": { "ar": "د. منى الشريف", "en": "Dr. Mona Al-Sharif" },
+      "thumbnail": "assets/images/course-nursing.svg",
+      "sections": [
+        {
+          "id": "c2-s1",
+          "title": { "ar": "العلامات الحيوية", "en": "Vital Signs" },
+          "lessons": [
+            {
+              "id": "c2-l1",
+              "title": { "ar": "قياس ضغط الدم", "en": "Measuring Blood Pressure" },
+              "durationSec": 12,
+              "video": "assets/videos/lesson5.mp4"
+            },
+            {
+              "id": "c2-l2",
+              "title": { "ar": "قياس درجة الحرارة والنبض", "en": "Measuring Temperature and Pulse" },
+              "durationSec": 7,
+              "video": "assets/videos/lesson6.mp4"
+            }
+          ]
+        },
+        {
+          "id": "c2-s2",
+          "title": { "ar": "العناية الأساسية بالمريض", "en": "Basic Patient Care" },
+          "lessons": [
+            {
+              "id": "c2-l3",
+              "title": { "ar": "غسل اليدين والتعقيم", "en": "Handwashing and Sterilization" },
+              "durationSec": 13,
+              "video": "assets/videos/lesson7.mp4"
+            },
+            {
+              "id": "c2-l4",
+              "title": { "ar": "التعامل الآمن مع المريض", "en": "Safe Patient Handling" },
+              "durationSec": 30,
+              "video": "assets/videos/lesson8.mp4"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
